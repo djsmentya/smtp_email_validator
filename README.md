@@ -1,6 +1,9 @@
 # SmtpEmailValidator
 
-TODO: Write a gem description
+Email validation using SMTP.
+It check if an email address exists without sending an email.
+
+This gem based on: https://github.com/pash/email_veracity_checker and https://github.com/skillnet/validates_email_with_smtp
 
 ## Installation
 
@@ -18,7 +21,14 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+
+# app/models/user.rb
+...
+include SmtpEmail::Validator
+validates :email, smtp_email: true
+
+```
 
 ## Contributing
 
@@ -27,3 +37,4 @@ TODO: Write usage instructions here
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
