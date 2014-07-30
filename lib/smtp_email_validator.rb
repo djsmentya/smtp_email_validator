@@ -1,4 +1,5 @@
 require "smtp_email_validator/version"
+require "email_invalid_format_exception"
 
 require 'resolv'
 require 'net/smtp'
@@ -74,7 +75,12 @@ module SmtpEmail
             #domain = "einsteinindustries.com"
             #call EmailCheck.run(email, decoy_from, domain, server = nil )
             def self.run(addr, decoy_from, domain, server = nil)
-       
+                if addr.index('@').nil?
+                    ret = EmailCheckStatus.new(-1, SmtpEmail::EmailInvalidFormatException)
+                    #puts "[CHECK EMAIL EXISTS] email is #{addr} -> no email specified"
+                    return ret
+                end
+                
                 server = get_mail_server(addr[(addr.index('@')+1)..-1]) if server.nil?
                 ret = nil
 
