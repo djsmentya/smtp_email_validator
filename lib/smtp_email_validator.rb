@@ -75,8 +75,7 @@ module SmtpEmail
             #domain = "einsteinindustries.com"
             #call EmailCheck.run(email, decoy_from, domain, server = nil )
             def self.run(addr, decoy_from, domain, server = nil)
-              return false if addr.empty?
-                if addr.index('@').nil?
+                if !addr.present? or addr.index('@').nil?
                     ret = EmailCheckStatus.new(-1, SmtpEmail::EmailInvalidFormatException)
                     #puts "[CHECK EMAIL EXISTS] email is #{addr} -> no email specified"
                     return ret
